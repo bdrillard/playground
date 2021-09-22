@@ -1,0 +1,28 @@
+{:duct.profile/base
+ {:duct.core/project-ns playground
+  
+  :duct.server/pedestal
+  {:base-service #ig/ref :playground.graphql/service
+   :service #:io.pedestal.http{:type :jetty}}
+
+  :playground.graphql/schema
+  {:resource #duct/resource "playground/schema.edn"}
+
+  :playground.graphql/service
+  {:schema #ig/ref :playground.graphql/schema
+   :options {:api-path "/graphql"
+             :ide-path "/"
+             :asset-path "/assets/graphiql"
+             :app-context {}
+             :env :prod}}}
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod
+ {:duct.server/pedestal
+  {:service #:io.pedestal.http{:join? true
+                               :host #duct/env "SERVER_HOST"
+                               :port #duct/env ["SERVER_PORT" Int]}}}
+
+ :duct.module/cambium {}
+ :duct.module/pedestal {}}

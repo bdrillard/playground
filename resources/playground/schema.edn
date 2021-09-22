@@ -1,0 +1,5 @@
+{:queries
+ {:greeting
+  {:type (non-null String)
+   :description "Returns our sole greeting."
+   :resolve :greeting}}}

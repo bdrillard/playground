@@ -1,0 +1,9 @@
+{:duct.core/environment :development
+ 
+ :duct.server/pedestal
+ {:service #:io.pedestal.http{:join? false
+                              :host "localhost"
+                              :port 8888}}
+ 
+ :playground.graphql/service
+ {:options {:env :dev}}}
